@@ -44,7 +44,7 @@
             <p>{{ activity.description }}</p>
             
             <div class="card-footer">
-              <span class="club-tag">🎪 نادي الرياضة</span>
+              <span class="club-tag">🎪 {{ activity.ownerName || 'نادي عام' }}</span>
               <button 
                 class="register-btn" 
                 :disabled="isRegistered(activity) || activity.seats <= 0"

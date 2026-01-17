@@ -16,7 +16,7 @@
       </div>
       <div class="card">
         <h3>الأندية النشطة</h3>
-        <p class="number">5</p>
+        <p class="number">{{ activeClubsCount }}</p>
       </div>
     </div>
 
@@ -26,7 +26,7 @@
         <div v-for="task in taskStore.tasks" :key="task.id" class="item">
           <div class="info">
             <strong>{{ task.title }}</strong>
-            <span>نادي: {{ task.ownerClub || 'عام' }}</span>
+            <span>نادي: {{ task.ownerName || 'عام' }}</span>
           </div>
           <div class="status">
             <span>{{ task.registeredStudents?.length || 0 }} مشارك</span>
@@ -49,6 +49,13 @@ export default {
     taskStore() { return useTaskStore() },
     totalStudents() {
       return this.taskStore.tasks.reduce((sum, t) => sum + (t.registeredStudents?.length || 0), 0)
+    },
+    activeClubsCount() {
+      const clubs = new Set(this.taskStore.tasks.map(t => t.ownerClub))
+      // Remove empty or undefined ownerClub if they exist
+      clubs.delete('')
+      clubs.delete(undefined)
+      return clubs.size
     }
   },
   mounted() {

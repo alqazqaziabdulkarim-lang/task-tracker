@@ -155,11 +155,15 @@ export default {
     async saveActivity() {
       try {
         if (this.editingId) {
-          await this.taskStore.updateTask(this.editingId, { ...this.form })
+          await this.taskStore.updateTask(this.editingId, { 
+            ...this.form,
+            ownerName: this.authStore.userName 
+          })
         } else {
           await this.taskStore.createTask({
             ...this.form,
             ownerClub: this.authStore.user.id,
+            ownerName: this.authStore.userName,
             registeredStudents: []
           })
         }

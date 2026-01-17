@@ -94,9 +94,8 @@ export const useTaskStore = defineStore('task', {
             this.error = null
 
             try {
-                const { title, description, completed } = taskData
-                const payload = { title, description, completed }
-                const response = await api.put(`/tasks/${id}`, payload)
+                // نرسل البيانات المحدثة كاملة للخلفية
+                const response = await api.put(`/tasks/${id}`, taskData)
 
                 const index = this.tasks.findIndex(task => task._id === id || task.id === id)
                 if (index !== -1) {

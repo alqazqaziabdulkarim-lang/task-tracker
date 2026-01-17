@@ -48,7 +48,7 @@ export const useTaskStore = defineStore('task', {
             this.error = null
 
             try {
-                const response = await api.get('/tasks/')
+                const response = await api.get('/activities/')
                 this.tasks = response.data.map(task => ({
                     ...task,
                     id: task.id || task._id
@@ -70,7 +70,7 @@ export const useTaskStore = defineStore('task', {
             this.error = null
 
             try {
-                const response = await api.post('/tasks/', taskData)
+                const response = await api.post('/activities/', taskData)
                 const newTask = {
                     ...response.data,
                     id: response.data.id || response.data._id
@@ -95,7 +95,7 @@ export const useTaskStore = defineStore('task', {
 
             try {
                 // نرسل البيانات المحدثة كاملة للخلفية
-                const response = await api.put(`/tasks/${id}`, taskData)
+                const response = await api.put(`/activities/${id}`, taskData)
 
                 const index = this.tasks.findIndex(task => task._id === id || task.id === id)
                 if (index !== -1) {
@@ -143,7 +143,7 @@ export const useTaskStore = defineStore('task', {
             this.error = null
 
             try {
-                await api.delete(`/tasks/${id}`)
+                await api.delete(`/activities/${id}`)
                 this.tasks = this.tasks.filter(task => task._id !== id && task.id !== id)
                 console.log('✅ تم حذف النشاط')
             } catch (error) {

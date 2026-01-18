@@ -22,7 +22,7 @@ import axios from 'axios'
 const api = axios.create({
   // Base URL for all API requests
   // STUDENT NOTE: Change this if your backend runs on a different port
-  baseURL: import.meta.env.VITE_API_URL || 'https://task-manager-clean-12.onrender.com/api',
+  baseURL: import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3000/api' : 'https://task-manager-clean-12.onrender.com/api'),
 
   // Default headers for all requests
   headers: {

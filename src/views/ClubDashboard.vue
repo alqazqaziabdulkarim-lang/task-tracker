@@ -162,14 +162,16 @@ export default {
         } else {
           await this.taskStore.createTask({
             ...this.form,
-            ownerClub: this.authStore.user.id,
+            ownerClub: this.authStore.user?.id,
             ownerName: this.authStore.user?.name || 'نادي',
             registeredStudents: []
           })
         }
         this.closeModal()
       } catch (error) {
-        alert('حدث خطأ أثناء الحفظ')
+        console.error(error)
+        const message = error.response?.data?.error || error.message || 'حدث خطأ أثناء الحفظ'
+        alert(message)
       }
     },
     async deleteActivity(id) {
